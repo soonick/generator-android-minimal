@@ -4,59 +4,37 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 
 module.exports = yeoman.generators.Base.extend({
-  initializing: function () {
-    this.pkg = require('../package.json');
-  },
-
   prompting: function () {
-    var done = this.async();
-
-    // Have Yeoman greet the user.
-    this.log(yosay(
-      'Welcome to the legendary' + chalk.red('AndroidMinimal') + ' generator!'
-    ));
-
-    var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
-
-    this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
-
-      done();
-    }.bind(this));
+    this.log(yosay('Welcome user!'));
   },
 
   writing: {
     app: function () {
       this.fs.copy(
-        this.templatePath('_package.json'),
-        this.destinationPath('package.json')
+        this.templatePath('build.gradle'),
+        this.destinationPath('build.gradle')
       );
       this.fs.copy(
-        this.templatePath('_bower.json'),
-        this.destinationPath('bower.json')
+        this.templatePath('src/main/AndroidManifest.xml'),
+        this.destinationPath('src/main/AndroidManifest.xml')
       );
-    },
+      this.fs.copy(
+        this.templatePath('src/main/res/values/strings.xml'),
+        this.destinationPath('src/main/res/values/strings.xml')
+      );
+      this.fs.copy(
+        this.templatePath('src/main/res/layout/main.xml'),
+        this.destinationPath('src/main/res/layout/main.xml')
+      );
+      this.fs.copy(
+        this.templatePath('src/main/java/com/example/app/Main.java'),
+        this.destinationPath('src/main/java/com/example/app/Main.java')
+      );
 
-    projectfiles: function () {
       this.fs.copy(
         this.templatePath('editorconfig'),
         this.destinationPath('.editorconfig')
       );
-      this.fs.copy(
-        this.templatePath('jshintrc'),
-        this.destinationPath('.jshintrc')
-      );
     }
-  },
-
-  install: function () {
-    this.installDependencies({
-      skipInstall: this.options['skip-install']
-    });
   }
 });
