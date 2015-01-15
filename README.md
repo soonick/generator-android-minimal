@@ -1,4 +1,4 @@
-# generator-android-minimal [![Build Status](https://secure.travis-ci.org/soonick/generator-android-minimal.png?branch=master)](https://travis-ci.org/soonick/generator-android-minimal)
+# generator-android-minimal
 
 > [Yeoman](http://yeoman.io) generator
 
